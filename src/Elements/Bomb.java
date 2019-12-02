@@ -11,8 +11,8 @@ public class Bomb extends Weapon{
 
 	@Override
 	public void computerAction() {
-		// TODO Auto-generated method stub
-		
+		if(game.damage(game.findElement(x, y)))
+			this.onDelete();
 	}
 
 	@Override
@@ -23,6 +23,8 @@ public class Bomb extends Weapon{
 	@Override
 	public void move() {
 		y--;
+		if(y == 0)
+			this.onDelete();
 	}
 
 	@Override

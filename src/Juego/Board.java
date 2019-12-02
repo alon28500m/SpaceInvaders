@@ -3,7 +3,7 @@ package Juego;
 
 import Elements.GameElement;
 import Elements.Ship;
-import Elements.SuperMissile;
+
 
 
 public class Board {
@@ -122,6 +122,8 @@ public class Board {
 	}
 	public void damage(int idx) {
 		elements[idx].decreaseShield();
-		
+	}
+	public String printElement(int idx) {
+		return elements[idx].toString();
 	}
 }

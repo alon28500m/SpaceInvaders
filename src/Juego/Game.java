@@ -4,7 +4,6 @@ import java.util.Random;
 
 import Elements.ExplosiveShip;
 import Elements.GameElement;
-import Elements.SuperMissile;
 import Elements.UCMShip;
 
 public class Game implements IPlayerController {
@@ -35,6 +34,7 @@ public class Game implements IPlayerController {
 	public Random getRandom() {
 		return rand;
 	}
+	
 
 	public Level getLevel() {
 		return level;
@@ -172,5 +172,24 @@ public class Game implements IPlayerController {
 		public int findElement(int X, int Y) {
 			return board.find(X, Y);
 		}
-		
+		public boolean damage(int idx) {
+			boolean hasHit = false;
+			if(idx != -1) {
+				hasHit = true;
+				board.damage(idx);
+			}
+			return hasHit;
+		}
+		public int getScore() {
+			return player.getPoints();
+		}
+		public int getShield() {
+			return player.getShield();
+		}
+		public boolean getSchockwave() {
+			return player.getShockwave();
+		}
+		public String printElement(int X, int Y) {
+			return board.printElement(findElement(X,Y));
+		}
 	}

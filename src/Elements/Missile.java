@@ -11,8 +11,8 @@ public class Missile extends Weapon{
 
 	@Override
 	public void computerAction() {
-		// TODO Auto-generated method stub
-		
+		if(game.damage(game.findElement(x, y)))
+			this.onDelete();
 	}
 
 	@Override
