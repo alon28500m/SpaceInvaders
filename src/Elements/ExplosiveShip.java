@@ -19,6 +19,7 @@ public class ExplosiveShip extends AlienShip{
 	public void onDelete() {
 		game.explode(x, y);
 		game.delete(x, y);
+		
 	}
 
 	@Override

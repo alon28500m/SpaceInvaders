@@ -1,3 +1,4 @@
+package Printer;
 import Juego.Game;
 
 public enum PrinterTypes {

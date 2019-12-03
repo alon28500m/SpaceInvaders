@@ -43,4 +43,7 @@ public abstract class AlienShip extends EnemyShip{
 	public boolean haveLanded() {
 		return y == 0;
 	}
+	public boolean recieveBombAttack(int amount) {
+		return false;
+	}
 }

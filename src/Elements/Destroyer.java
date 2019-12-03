@@ -6,8 +6,8 @@ public class Destroyer extends AlienShip{
 	public static final int points = 5;
 	
 	private Bomb bomb;
-	public Destroyer(Game game, int X, int Y, int lives) {
-		super(game, X, Y, lives);
+	public Destroyer(Game game, int X, int Y) {
+		super(game, X, Y, 2);
 		bomb = null;
 	}
 

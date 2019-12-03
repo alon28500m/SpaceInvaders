@@ -1,6 +1,7 @@
 package Juego;
 
 
+import Elements.ExplosiveShip;
 import Elements.GameElement;
 import Elements.Ship;
 
@@ -10,7 +11,7 @@ public class Board {
 	Level level;
 	protected GameElement elements[];
 	private int currentElements;
-
+	Game game;
 	public Board(int width, int height) {
 		currentElements = width * height;
 	}
@@ -20,6 +21,7 @@ public class Board {
 		for (int i = 0; i < currentElements; i++) {
 			elements[i] = null;
 		}
+		this.game = game;
 	}
 
 	public void add(GameElement gameElement) {
@@ -30,19 +32,21 @@ public class Board {
 	public void update() {
 		int moveCount = 0;
 		for(int i = 0; i < currentElements; i++) {
-			elements[i].computerAction();
 			if(moveCount == 0) {
 				moveCount = level.getNumCyclesToMoveOneCell();
 				elements[i].move();
 				moveCount--;
 			}
+			elements[i].computerAction();
 			
 		}
 
 	}
 
 	public void computerAction() {
-// TODO implement
+		for(int i = 0; i < currentElements; i++) {//esto es así?
+			elements[i].computerAction();
+		}
 	}
 	public int getCurrentElements() {return currentElements;}
 
@@ -83,14 +87,18 @@ public class Board {
 	}
 
 	public void removeDead() {
-
+		for(int i = 0; i < currentElements; i++) {
+			if(elements[i].getShield() <= 0) {
+				elements[i].onDelete();
+			}
+		}
 	}
 	public void delete(int X, int Y) {
 		this.remove(this.getObjectAt(X, Y));
 	}
 	public void damageAll() {
 		for(int i = 0; i < currentElements; i++) {
-			elements[i].decreaseShield();
+			elements[i].decreaseShield(1);
 			if(!elements[i].isAlive()) {
 				remove(elements[i]);
 				i--;
@@ -110,20 +118,27 @@ public class Board {
 		}
 		return ok;
 	}
-	public int find(int X, int Y) {
-		int idx = -1;
-		for(int i = 0; i < currentElements; i++) {
-			if((elements[i].getX()==X)&&(elements[i].getY()==Y)) {
-				idx = i;
-				break;
-			}			
+
+	public boolean damage(int X, int Y, int amount) {
+		boolean hasHit = false;
+		if(getIndex(X,Y) != -1) {
+			hasHit = true;
+			elements[getIndex(X,Y)].decreaseShield(amount);
 		}
-		return idx;
+		return hasHit;
+		
 	}
-	public void damage(int idx) {
-		elements[idx].decreaseShield();
+	public void explode(int X, int Y) {
+		for(int i = 0; i < 9; i++) {
+			damage(X-i%3-1,Y-i/3+1, 1);
+		}
+		
 	}
-	public String printElement(int idx) {
-		return elements[idx].toString();
+	public void explosiveCarrier(int X, int Y) {
+		int idx = getIndex(X,Y);
+		ExplosiveShip explosive = new ExplosiveShip(game, X, Y, 1);
+		if(idx != -1)
+				elements[idx] = explosive;
 	}
+	
 }

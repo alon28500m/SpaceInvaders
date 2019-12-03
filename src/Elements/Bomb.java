@@ -11,7 +11,7 @@ public class Bomb extends Weapon{
 
 	@Override
 	public void computerAction() {
-		if(game.damage(game.findElement(x, y)))
+		if(game.checkCollision(x, y - 1))
 			this.onDelete();
 	}
 
@@ -32,5 +32,15 @@ public class Bomb extends Weapon{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	public boolean performAttack() {
+		boolean done = false;
+		if(game.checkCollision(x, y - 1)) {
+			game.damage(x, y - 1, 1);
+			done = true;
+		}	
+		return done;
+	}
+	public boolean recieveBombAttack(int amount) {
+		return false;
+	}
 }

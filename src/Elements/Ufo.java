@@ -35,4 +35,8 @@ private static final int points = 25;
 		return "<(+)>";
 	}
 	public int getPoints() {return Ufo.points;}
+	
+	public boolean recieveBombAttack(int amount) {
+		return false;
+	}
 }

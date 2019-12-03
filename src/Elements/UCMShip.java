@@ -4,7 +4,7 @@ import Juego.Game;
 
 public class UCMShip extends Ship{
 	private boolean shockwave;
-	private Missile misil;
+	private Weapon misil; // ??????
 	private boolean supermisil;
 	private int points;
 	private boolean isLeft;
@@ -22,10 +22,21 @@ public class UCMShip extends Ship{
 	public boolean getShockwave() {return this.shockwave;}
 	public boolean setShockwave(boolean wave) {return shockwave = wave;}
 	
+	public void shootSuper() {
+		if(misil.equals(null)) {
+			misil = new SuperMissile(game, this.x, this.y);
+			game.addObject(misil);
+		}
+	}
+	public void shootMissile() {
+		if(misil.equals(null)) {
+			misil = new Missile(game, this.x, this.y, 1);
+			game.addObject(misil);
+		}
+	}
 	@Override
 	public void computerAction() {
-		if(misil.equals(null))
-			misil = new Missile(game, this.x, this.y, 1);
+		
 	}
 
 	@Override
@@ -74,7 +85,7 @@ public class UCMShip extends Ship{
 	}
 	public void setSupermisil(boolean supermisil) {
 		this.supermisil = supermisil;
-	}	
+	}
 
 }
 

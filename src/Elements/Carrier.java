@@ -7,8 +7,8 @@ public class Carrier extends AlienShip{
 	boolean isLeft;
 	boolean moveDown;
 	double explode;
-	public Carrier(Game game, int X, int Y, int lives) {
-		super(game, X, Y, lives);
+	public Carrier(Game game, int X, int Y) {
+		super(game, X, Y, 2);
 		this.isLeft = true;
 		this.moveDown = false;
 		explode = 0.05;

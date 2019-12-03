@@ -10,20 +10,21 @@ public class Controller {
 	Game game;
 	Level level;
 	Scanner in;
-	public Controller(Random rand) {
-		game = new Game(level, rand);
-		in = new Scanner();
+
+	public Controller(Readable input) {
+		in = new Scanner(input);
 	}
-	
-	while(!game.isFinished()){
-		System.out.println(PROMPT);
-		String[] words = in.nextLine().toLowerCase().trim().split ("\\s+");
-		Command command = CommandGenerator.parse(words);
-		if (command != null)
-			
-		if (command.execute(game))
-			System.out.println(game);
-		else
-			System.out.format(unknownCommandMsg);
+	public void execute() {
+		while (!game.isFinished()) {
+			System.out.println(PROMPT);
+			String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
+			Command command = CommandGenerator.parseCommand(words);
+			if (command != null)
+
+				if (command.execute(game))
+					System.out.println(game);
+				else
+					System.out.format(unknownCommandMsg);
+		}
 	}
 }

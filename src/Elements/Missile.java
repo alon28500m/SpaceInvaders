@@ -11,7 +11,7 @@ public class Missile extends Weapon{
 
 	@Override
 	public void computerAction() {
-		if(game.damage(game.findElement(x, y)))
+		if(performAttack())
 			this.onDelete();
 	}
 
@@ -32,5 +32,16 @@ public class Missile extends Weapon{
 	public String toString() {
 		return "^";
 	}
-
+	public boolean performAttack() {
+		boolean done = false;
+		if(game.checkCollision(x, y + 1)) {
+			done = game.damage(x, y - 1, 1);
+			
+		}	
+		return done;
+	}
+	public boolean recieveBombAttack(int amount) {
+		this.onDelete();
+		return true;
+	}
 }

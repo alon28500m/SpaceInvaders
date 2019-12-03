@@ -5,10 +5,12 @@ import java.util.Scanner;
 
 import Juego.Game;
 import Juego.Level;
+import Printer.GamePrinter;
 
 
 public class ResetCommand extends NoParamsCommand{
 Scanner in;
+GamePrinter print;
 	public ResetCommand(Scanner input) {
 		super("reset", "r", "", "[R]eset: starts a new game.\n");
 		in = input;

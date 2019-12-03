@@ -3,34 +3,38 @@ package Elements;
 import Juego.Game;
 
 public class SuperMissile extends Weapon{
-
+	private int cost;
 	public SuperMissile(Game game, int X, int Y) {
 		super(game, X, Y, 2);
+		cost = 20;
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void computerAction() {
-		// TODO Auto-generated method stub
-		
+		if(game.damage(x, y + 1, shield))
+			this.onDelete();
 	}
 
 	@Override
 	public void onDelete() {
-		// TODO Auto-generated method stub
+		game.delete(x, y);
 		
 	}
 
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
-		
+		y++;		
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return null;
+		return "^";
+	}
+
+	public int getCost() {
+		return cost;
 	}
 
 }

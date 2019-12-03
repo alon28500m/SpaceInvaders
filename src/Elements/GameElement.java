@@ -2,7 +2,7 @@ package Elements;
 
 import Juego.Game;
 
-public abstract class GameElement /*implements IAttack*/ {
+public abstract class GameElement implements IAttack {
 	protected int x;
 	protected int y;
 	protected int shield;
@@ -30,10 +30,8 @@ public abstract class GameElement /*implements IAttack*/ {
 	public int getShield() {
 		return this.shield;
 	}
-	public void decreaseShield() {
-		 this.shield--;
-		 if(shield <= 0)
-			 game.delete(this.x, this.y);
+	public void decreaseShield(int amount) {
+		 this.shield -= amount;
 	}
 
 	public boolean isOnPosition( int X, int Y ) {

@@ -2,7 +2,6 @@ package Juego;
 
 import java.util.Random;
 
-import Elements.ExplosiveShip;
 import Elements.GameElement;
 import Elements.UCMShip;
 
@@ -34,7 +33,9 @@ public class Game implements IPlayerController {
 	public Random getRandom() {
 		return rand;
 	}
-	
+	public boolean getSuperMissile() {
+		return player.getSupermisil();
+	}
 
 	public Level getLevel() {
 		return level;
@@ -159,26 +160,14 @@ public class Game implements IPlayerController {
 			board.damageAll();
 		}
 		public void explosiveCarrier(int X, int Y) {
-			int idx = findElement(X,Y);
-			ExplosiveShip explosive = new ExplosiveShip(this, X, Y, 1);
-			if(idx != -1)
-					board.elements[idx] = explosive;
+			board.explosiveCarrier(X,Y);
 		}
 		public void explode(int X, int Y) {
-			for(int i = 0; i < 9; i++) {
-				board.damage(findElement(X-i%3-1,Y-i/3+1));
-			}
+			board.explode(X,Y);
 		}
-		public int findElement(int X, int Y) {
-			return board.find(X, Y);
-		}
-		public boolean damage(int idx) {
-			boolean hasHit = false;
-			if(idx != -1) {
-				hasHit = true;
-				board.damage(idx);
-			}
-			return hasHit;
+		
+		public boolean damage(int X, int Y, int amount) {
+			return board.damage(X,Y, amount);
 		}
 		public int getScore() {
 			return player.getPoints();
@@ -189,7 +178,12 @@ public class Game implements IPlayerController {
 		public boolean getSchockwave() {
 			return player.getShockwave();
 		}
-		public String printElement(int X, int Y) {
-			return board.printElement(findElement(X,Y));
+		public boolean buySuperMissile() {
+			boolean ok = false;
+			if(player.getPoints() > 20) {
+				ok = true;
+				player.setSupermisil(ok);
+			}
+			return ok;
 		}
 	}
