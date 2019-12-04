@@ -1,5 +1,10 @@
 package Printer;
 
-public abstract class GamePrinter {
+import Juego.Game;
 
+public abstract class GamePrinter {
+	Game game;
+	public GamePrinter(Game game) {
+		this.game = game;
+	}
 }

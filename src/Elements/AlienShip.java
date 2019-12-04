@@ -46,4 +46,12 @@ public abstract class AlienShip extends EnemyShip{
 	public boolean recieveBombAttack(int amount) {
 		return false;
 	}
+	public boolean recieveMissileAttack(int amount) {
+		getDamage(amount);
+		return true;
+	}
+	public boolean recieveShockwaveAttack(int amount) {
+		getDamage(amount);
+		return true;
+	}
 }

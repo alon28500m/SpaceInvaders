@@ -86,6 +86,15 @@ public class UCMShip extends Ship{
 	public void setSupermisil(boolean supermisil) {
 		this.supermisil = supermisil;
 	}
-
+	public boolean recieveBombAttack(int amount) {
+		getDamage(amount);
+		return true;
+	}
+	public boolean recieveMissileAttack(int amount) {
+		return false;
+	}
+	public boolean recieveShockwaveAttack(int amount) {
+		return false;
+	}
 }
 

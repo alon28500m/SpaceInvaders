@@ -43,4 +43,13 @@ public class Bomb extends Weapon{
 	public boolean recieveBombAttack(int amount) {
 		return false;
 	}
+	public boolean recieveMissileAttack(int amount) {
+		this.onDelete();
+		return true;
+	}
+	public boolean recieveShockwaveAttack(int amount) {
+		this.onDelete();
+		return true;
+	}
+	
 }

@@ -3,7 +3,9 @@ package Juego;
 
 import Elements.ExplosiveShip;
 import Elements.GameElement;
+import Elements.Missile;
 import Elements.Ship;
+import Elements.SuperMissile;
 
 
 
@@ -98,7 +100,7 @@ public class Board {
 	}
 	public void damageAll() {
 		for(int i = 0; i < currentElements; i++) {
-			elements[i].decreaseShield(1);
+			elements[i].getDamage(1);
 			if(!elements[i].isAlive()) {
 				remove(elements[i]);
 				i--;
@@ -120,13 +122,19 @@ public class Board {
 	}
 
 	public boolean damage(int X, int Y, int amount) {
-		boolean hasHit = false;
-		if(getIndex(X,Y) != -1) {
-			hasHit = true;
-			elements[getIndex(X,Y)].decreaseShield(amount);
-		}
-		return hasHit;
+		boolean couldHit = false;
+		if(elements[getIndex(X,Y)] instanceof Missile||elements[getIndex(X,Y)] instanceof SuperMissile)
+			couldHit= elements[getIndex(X, Y + 1)].receiveMissileAttack(amount);
 		
+		else if(elements[getIndex(X,Y)] instanceof Missile)
+			couldHit = elements[getIndex(X,Y - 1)].receiveBombAttack(amount);
+		else {
+			for(int i = 0; i < currentElements; i++) {
+				 elements[i].receiveShockWaveAttack(amount);
+			}
+			couldHit = true;
+		}
+		return couldHit;		
 	}
 	public void explode(int X, int Y) {
 		for(int i = 0; i < 9; i++) {
@@ -140,5 +148,22 @@ public class Board {
 		if(idx != -1)
 				elements[idx] = explosive;
 	}
-	
+	public String infoElements() {
+		String out = "";
+		for(int i = 0; i < currentElements; i++) {
+			out += elements[i].getClass().getName() + ":";
+			out += elements[i].getX() + ":";
+			out += elements[i].getY() + ":";
+			out += elements[i].getShield();
+			
+		}
+		return out;
+	}
+	public boolean checkCollision(int X, int Y) {
+		boolean hasHit = false;
+		if(getIndex(X,Y) != -1) {
+			hasHit = true;
+		}
+		return hasHit;
+	}
 }

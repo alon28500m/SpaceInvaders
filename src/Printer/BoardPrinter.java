@@ -1,18 +1,18 @@
 package Printer;
+import Juego.Board;
 import Juego.Game;
 
 public class BoardPrinter extends GamePrinter {
 int rows = 8, columns = 9;
-	
+	Board board;
 	private int cellSize = 7;
 	private String space = " ";
 	private String vDelimiter = "|";
 	private String hDelimiter = "-";
 	
-	private Game game;
-	
-	public BoardPrinter(){
-		
+	public BoardPrinter(Game game, Board tablero){
+		super(game);
+		board = tablero;
 	}
 	
 	public String toString()

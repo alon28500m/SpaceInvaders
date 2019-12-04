@@ -30,9 +30,7 @@ public abstract class GameElement implements IAttack {
 	public int getShield() {
 		return this.shield;
 	}
-	public void decreaseShield(int amount) {
-		 this.shield -= amount;
-	}
+	
 
 	public boolean isOnPosition( int X, int Y ) {
 		return this.x == X && y == Y;

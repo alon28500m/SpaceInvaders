@@ -17,8 +17,9 @@ public abstract class Command {
 		this.helpText = helpText;
 	}
 
+	
 	public abstract boolean execute(Game game);
-
+	
 	public abstract Command parse(String[] commandWords);
 
 	protected boolean matchCommandName(String inputText) {

@@ -22,6 +22,7 @@ Scanner in;
 			isMovementLeft = false;
 
 		int speed = in.nextInt();
+		
 		game.MovePlayer(isMovementLeft, speed);
 		
 		return keepGoing;

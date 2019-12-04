@@ -17,7 +17,8 @@ public class Shockwave extends Weapon{
 
 	@Override
 	public void onDelete() {
-		// TODO Auto-generated method stub
+		game.enableShockWave();
+		game.delete(x, y);
 		
 	}
 
@@ -26,11 +27,23 @@ public class Shockwave extends Weapon{
 		// TODO Auto-generated method stub
 		
 	}
-
+	public boolean performAttack() {
+		game.damageAllShips();
+		return true;
+		
+	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	public boolean recieveBombAttack(int amount) {
+		return false;
+	}
+	public boolean recieveMissileAttack(int amount) {
+		return false;
+	}
+	public boolean recieveShockwaveAttack(int amount) {
+		return false;
+	}
 }

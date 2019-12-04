@@ -44,4 +44,10 @@ public class Missile extends Weapon{
 		this.onDelete();
 		return true;
 	}
+	public boolean recieveMissileAttack(int amount) {
+		return false;
+	}
+	public boolean recieveShockwaveAttack(int amount) {
+		return false;
+	}
 }

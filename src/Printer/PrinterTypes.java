@@ -2,7 +2,7 @@ package Printer;
 import Juego.Game;
 
 public enum PrinterTypes {
-	BOARDPRINTER("boardprinter", "prints the game formatted as a board of dimension: ", new BoardPrinter()),
+	BOARDPRINTER("boardprinter", "prints the game formatted as a board of dimension: ", new BoardPrinter(game, board)),
 	STRINGIFIER("stringifier", "prints the game as plain text", new Stringifier());
 	private String printerName;
 	private String helpText;
