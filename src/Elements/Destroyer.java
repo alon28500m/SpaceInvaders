@@ -29,12 +29,6 @@ public class Destroyer extends AlienShip{
 		game.receivePoints(points);
 	}
 
-	@Override
-	public void move() {
-		this.x++;
-	}
-
-	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return null;

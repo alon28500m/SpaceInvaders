@@ -16,7 +16,13 @@ public class Stringifier extends GamePrinter {
 			out += "/n";
 			out += "Number of cycles: " + game.getCurrentCycle();
 			out += game.getLevel();
-			out += game.infoElements();
+			out += game.infoToString();
 			return out;
+		}
+
+		@Override
+		public GamePrinter setGame(Game game2) {
+			Stringifier strfier = new Stringifier(game2);
+			return strfier;
 		}
 }

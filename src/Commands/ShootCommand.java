@@ -6,8 +6,8 @@ import Juego.Game;
 
 public class ShootCommand extends Command {
 	Scanner in;
-	public ShootCommand(Scanner input) {
-		super("shoot", "s", "<supermissile>", "The player shoots a missile");
+	public ShootCommand(Scanner input, String commandText) {
+		super("shoot", "s", commandText, "The player shoots a missile");
 		in = input;
 		// TODO Auto-generated constructor stub
 	}
@@ -15,13 +15,13 @@ public class ShootCommand extends Command {
 	@Override
 	public boolean execute(Game game) {
 		boolean keepGoing = true;
-		String arg = in.next();
-		if(arg.contentEquals("supermissile")) {
+		if(getCommandText().contentEquals("supermissile")) {
 			if(!game.getSuperMissile())
 			{
 				keepGoing = false;
 				System.out.println("Error, no supermissile");
 			}
+			game.shootSuper();
 		}
 		else
 			game.shootMissile();
@@ -30,8 +30,12 @@ public class ShootCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords) {
-		// TODO Auto-generated method stub
-		return null;
+		ShootCommand shoot;
+		if ((commandWords[0].equals(this.name)) || (commandWords[0].equals(this.shortName))) {
+			shoot = new ShootCommand(in, commandWords[1]);
+			return shoot;
+		} else
+			return null;
 	}
 
 }

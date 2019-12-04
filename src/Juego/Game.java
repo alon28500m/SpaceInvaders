@@ -34,10 +34,6 @@ public class Game implements IPlayerController {
 		board.add(player);
 	}
 
-	public Random getRandom() {
-		return rand;
-	}
-
 	public boolean getSuperMissile() {
 		return player.getSupermisil();
 	}
@@ -85,7 +81,7 @@ public class Game implements IPlayerController {
 	}
 
 	public String infoToString() {
-		return null;/* game-state string to be printed with the board */
+		return board.infoToString() + "UCMShip (player): P;x,y;shield;"+ player.getPoints() + player.getShockwave() + player.getSupermisil();
 	}
 
 	public String getWinnerMessage() {
@@ -122,11 +118,16 @@ public class Game implements IPlayerController {
 		return ok;
 	}
 
+	public boolean shootSuper() {
+		player.shootSuper();
+		return true;
+	}
 	@Override
 	public boolean shootMissile() {
 		player.computerAction();
-		return false;
+		return true;
 	}
+	
 
 	@Override
 	public boolean shockWave() {
@@ -198,9 +199,8 @@ public class Game implements IPlayerController {
 			player.setSupermisil(ok);
 		}
 		return ok;
-	}
-
-	public String infoElements() {
-		return board.infoElements();
+	
 	}
 }
+
+

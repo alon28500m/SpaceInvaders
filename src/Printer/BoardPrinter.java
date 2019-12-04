@@ -19,11 +19,7 @@ int rows = 8, columns = 9;
 	{
 		String out = "";
 		
-		out += "Score: " + game.getScore() + "\n" ; 
-		out += "Shield: " + game.getShield() + "\n";
-		out += "ShockWave: " + (game.getSchockwave() ? "YES" : "NO") + "\n";
-		out += "Cycle number: " + game.getCurrentCycle() + "\n";
-		//aliens remaining
+		out += game.infoToString();
 		
 		
 		
@@ -47,5 +43,12 @@ int rows = 8, columns = 9;
 		}
 		
 		return out;
+	}
+
+	@Override
+	public GamePrinter setGame(Game game2) {
+		BoardPrinter boardPrinter = new BoardPrinter(game2, board);
+		return boardPrinter;
+		
 	}
 }

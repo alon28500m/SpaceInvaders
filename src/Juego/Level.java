@@ -1,5 +1,7 @@
 package Juego;
 
+
+
 public enum Level {
 	EASY(4, 2, 0.2, 3, 0.5, 1), HARD(8, 4, 0.3, 2, 0.2, 2), INSANE(12, 4, 0.5, 1, 0.1, 3);
 	private int numCarriers;
@@ -19,7 +21,16 @@ public enum Level {
 		ufoFreq = ufoFrequency;
 		numRowsOfCarriers = numRowsOfCarrierShips;
 	}
-
+	 public static Level StringToLevel(String s)
+	   {
+		   Level l = EASY;
+		   if(s.equals("hard"))
+			   l = HARD;
+		   else if(s.equals("insane"))
+			   l = INSANE;
+		   
+		   return l;
+	   }
 	public int getNumCarrierShips() {
 		return numCarriers;
 	}

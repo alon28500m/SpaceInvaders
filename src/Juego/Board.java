@@ -1,6 +1,8 @@
 package Juego;
 
 
+import Elements.Carrier;
+import Elements.Destroyer;
 import Elements.ExplosiveShip;
 import Elements.GameElement;
 import Elements.Missile;
@@ -14,10 +16,12 @@ public class Board {
 	protected GameElement elements[];
 	private int currentElements;
 	Game game;
+	private int moveCount;
 	public Board(int width, int height) {
 		currentElements = width * height;
+		moveCount = level.getNumCyclesToMoveOneCell();
 	}
-	public Board(Game game, int X, int Y, int lives) {
+	public Board(Game game, int X, int Y) {
 		
 		elements = new GameElement[currentElements];
 		for (int i = 0; i < currentElements; i++) {
@@ -32,17 +36,17 @@ public class Board {
 	}
 
 	public void update() {
-		int moveCount = 0;
-		for(int i = 0; i < currentElements; i++) {
+			moveCount--;
 			if(moveCount == 0) {
 				moveCount = level.getNumCyclesToMoveOneCell();
-				elements[i].move();
-				moveCount--;
+				for(int j = 0; j < currentElements; j++) {
+					elements[j].move();
+				}
 			}
-			elements[i].computerAction();
 			
-		}
-
+			for(int i = 0; i < currentElements; i++) {
+				elements[i].computerAction();
+			}
 	}
 
 	public void computerAction() {
@@ -148,15 +152,21 @@ public class Board {
 		if(idx != -1)
 				elements[idx] = explosive;
 	}
-	public String infoElements() {
+	public String infoToString() {
 		String out = "";
-		for(int i = 0; i < currentElements; i++) {
-			out += elements[i].getClass().getName() + ":";
-			out += elements[i].getX() + ":";
-			out += elements[i].getY() + ":";
-			out += elements[i].getShield();
-			
-		}
+		
+		out += "Ufo: U, x, y, 1";
+		out += "Carrier ship: C;x,y;2;" + level.getNumCyclesToMoveOneCell() ;
+		out += "Ufo: U;x;y;shield";
+		out += "Carrier ship: C;x,y;shield;" + level.getNumCyclesToMoveOneCell() + Carrier.getDir();
+		out += "Destroyer: D;x,y;shield;" + level.getNumCyclesToMoveOneCell();Destroyer.getDir();
+		out += "Explosive ship: E;x,y;shield;" + level.getNumCyclesToMoveOneCell();ExplosiveShip.getDir();
+		out += "Bomb: B;x,y";
+		out += "Missile: M;x,y";
+		out += "Supermissile: X;x,y";
+		
+
+		//aliens remaining
 		return out;
 	}
 	public boolean checkCollision(int X, int Y) {

@@ -1,6 +1,6 @@
 package Juego;
 
-import java.util.Random;
+
 import java.util.Scanner;
 
 import Commands.Command;
@@ -14,11 +14,14 @@ public class Controller {
 	Level level;
 	Scanner in;
 	private static final String unknownCommandMsg = "Error. The command does not exist";
-	public Controller(Readable input, BoardPrinter print) {
-		in = new Scanner(input);
-		printer = print;
+	private static final String PROMPT = ">";
+	public Controller(Game game) {
+		this.game = game;
+		in = new Scanner();
+		printer = new BoardPrinter(game, null);
 	}
 	public void execute() {
+		System.out.println(printer);
 		while (!game.isFinished()) {
 			System.out.println(PROMPT);
 			String[] words = in.nextLine().toLowerCase().trim().split("\\s+");

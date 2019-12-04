@@ -3,14 +3,18 @@ package Commands;
 import java.util.Random;
 import java.util.Scanner;
 
+import Juego.Board;
 import Juego.Game;
 import Juego.Level;
+import Printer.BoardPrinter;
 import Printer.GamePrinter;
 
 
 public class ResetCommand extends NoParamsCommand{
 Scanner in;
+Board board;
 GamePrinter print;
+Random rand;
 	public ResetCommand(Scanner input) {
 		super("reset", "r", "", "[R]eset: starts a new game.\n");
 		in = input;
@@ -27,9 +31,8 @@ GamePrinter print;
 			d = Level.INSANE;
 		
 		System.out.println("Choose a new seed: ");
-		Random seed;
-		game = new Game(d, seed);
-		print = new GamePrinter(game);
+		game = new Game(d, rand);
+		print = new BoardPrinter(game, board);
 		return false;
 	}
 
