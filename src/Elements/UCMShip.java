@@ -61,8 +61,11 @@ public class UCMShip extends Ship{
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		String out = "/-^-\\";
+		if(shield == 0)
+			out =  "_+.+_";
+		
+		return out;
 	}
 	public void enableMisil() {this.misil = null;}
 	public void setPoints(int p) {this.points += p;}

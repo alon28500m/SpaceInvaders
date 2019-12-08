@@ -29,8 +29,7 @@ public class Bomb extends Weapon{
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+	return " ! " ;
 	}
 	public boolean performAttack() {
 		boolean done = false;

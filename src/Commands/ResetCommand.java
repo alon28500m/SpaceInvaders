@@ -32,7 +32,7 @@ Random rand;
 		
 		System.out.println("Choose a new seed: ");
 		game = new Game(d, rand);
-		print = new BoardPrinter(game, board);
+		print = new BoardPrinter(game);
 		return false;
 	}
 

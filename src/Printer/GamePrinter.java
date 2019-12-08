@@ -7,6 +7,6 @@ public abstract class GamePrinter {
 	public GamePrinter(Game game) {
 		this.game = game;
 	}
-	public abstract GamePrinter setGame(Game game2);
+	public abstract GamePrinter setGame(Game game);
 	public abstract String toString();
 }

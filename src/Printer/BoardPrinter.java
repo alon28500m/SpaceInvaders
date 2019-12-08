@@ -1,27 +1,30 @@
 package Printer;
-import Juego.Board;
+
+import Juego.BoardInitializer;
 import Juego.Game;
 
 public class BoardPrinter extends GamePrinter {
-int rows = 8, columns = 9;
-	Board board;
+	int rows = 8, columns = 9;
+	BoardInitializer init;
 	private int cellSize = 7;
 	private String space = " ";
 	private String vDelimiter = "|";
 	private String hDelimiter = "-";
 	
-	public BoardPrinter(Game game, Board tablero){
+	public BoardPrinter(Game game){
 		super(game);
-		board = tablero;
 	}
+	
+
 	
 	public String toString()
 	{
 		String out = "";
 		
-		out += game.infoToString();
-		
-		
+		out += "Score: " + game.getScore() + "\n";
+		out += "Shield: " + game.getShield() + "\n";
+		out += "ShockWave: " + (game.getSchockwave() ? "YES" : "NO") + "\n";
+		out += "Cycle number: " + game.getCurrentCycle() + "\n";
 		
 		out += "\n" + " " + MyStringUtils.repeat(hDelimiter, (7+1)*columns) + "\n"; 
 		
@@ -45,10 +48,8 @@ int rows = 8, columns = 9;
 		return out;
 	}
 
-	@Override
-	public GamePrinter setGame(Game game2) {
-		BoardPrinter boardPrinter = new BoardPrinter(game2, board);
+		public GamePrinter setGame(Game game2) {
+		BoardPrinter boardPrinter = new BoardPrinter(game2);
 		return boardPrinter;
-		
 	}
 }

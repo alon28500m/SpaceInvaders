@@ -2,6 +2,9 @@ package Juego;
 
 import java.util.Random;
 
+import Elements.Carrier;
+import Elements.Destroyer;
+import Elements.ExplosiveShip;
 import Elements.GameElement;
 import Elements.UCMShip;
 
@@ -81,7 +84,18 @@ public class Game implements IPlayerController {
 	}
 
 	public String infoToString() {
-		return board.infoToString() + "UCMShip (player): P;x,y;shield;"+ player.getPoints() + player.getShockwave() + player.getSupermisil();
+		String out = "";
+		out += "Ufo: U, x, y, 1";
+		out += "Carrier ship: C;x,y;2;" + level.getNumCyclesToMoveOneCell() ;
+		out += "Ufo: U;x;y;shield";
+		out += "Carrier ship: C;x,y;shield;" + level.getNumCyclesToMoveOneCell() + Carrier.getDir();
+		out += "Destroyer: D;x,y;shield;" + level.getNumCyclesToMoveOneCell();Destroyer.getDir();
+		out += "Explosive ship: E;x,y;shield;" + level.getNumCyclesToMoveOneCell();ExplosiveShip.getDir();
+		out += "Bomb: B;x,y";
+		out += "Missile: M;x,y";
+		out += "Supermissile: X;x,y";
+		out += "UCMShip (player): P;x,y;shield;"+ player.getPoints() + player.getShockwave() + player.getSupermisil();
+		return out; 
 	}
 
 	public String getWinnerMessage() {

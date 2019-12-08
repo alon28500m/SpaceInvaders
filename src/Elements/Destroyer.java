@@ -30,8 +30,7 @@ public class Destroyer extends AlienShip{
 	}
 
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return " !< "+ shield + ">!" ;
 	}
 
 }

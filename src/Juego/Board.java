@@ -1,8 +1,7 @@
 package Juego;
 
 
-import Elements.Carrier;
-import Elements.Destroyer;
+
 import Elements.ExplosiveShip;
 import Elements.GameElement;
 import Elements.Missile;
@@ -12,22 +11,15 @@ import Elements.SuperMissile;
 
 
 public class Board {
-	Level level;
 	protected GameElement elements[];
 	private int currentElements;
 	Game game;
-	private int moveCount;
 	public Board(int width, int height) {
-		currentElements = width * height;
-		moveCount = level.getNumCyclesToMoveOneCell();
-	}
-	public Board(Game game, int X, int Y) {
-		
-		elements = new GameElement[currentElements];
-		for (int i = 0; i < currentElements; i++) {
+		currentElements = 0;
+		elements = new GameElement[width*height];
+		for (int i = 0; i < width*height; i++) {
 			elements[i] = null;
 		}
-		this.game = game;
 	}
 
 	public void add(GameElement gameElement) {
@@ -36,16 +28,9 @@ public class Board {
 	}
 
 	public void update() {
-			moveCount--;
-			if(moveCount == 0) {
-				moveCount = level.getNumCyclesToMoveOneCell();
-				for(int j = 0; j < currentElements; j++) {
-					elements[j].move();
-				}
-			}
 			
 			for(int i = 0; i < currentElements; i++) {
-				elements[i].computerAction();
+				elements[i].move();
 			}
 	}
 
@@ -152,23 +137,7 @@ public class Board {
 		if(idx != -1)
 				elements[idx] = explosive;
 	}
-	public String infoToString() {
-		String out = "";
-		
-		out += "Ufo: U, x, y, 1";
-		out += "Carrier ship: C;x,y;2;" + level.getNumCyclesToMoveOneCell() ;
-		out += "Ufo: U;x;y;shield";
-		out += "Carrier ship: C;x,y;shield;" + level.getNumCyclesToMoveOneCell() + Carrier.getDir();
-		out += "Destroyer: D;x,y;shield;" + level.getNumCyclesToMoveOneCell();Destroyer.getDir();
-		out += "Explosive ship: E;x,y;shield;" + level.getNumCyclesToMoveOneCell();ExplosiveShip.getDir();
-		out += "Bomb: B;x,y";
-		out += "Missile: M;x,y";
-		out += "Supermissile: X;x,y";
-		
-
-		//aliens remaining
-		return out;
-	}
+	
 	public boolean checkCollision(int X, int Y) {
 		boolean hasHit = false;
 		if(getIndex(X,Y) != -1) {
