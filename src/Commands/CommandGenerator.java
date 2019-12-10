@@ -2,12 +2,14 @@ package Commands;
 
 import java.util.Scanner;
 
+import Exceptions.CommandParseException;
+
 public class CommandGenerator {
 	static Scanner input;
 	private static Command[] availableCommands = { new ListCommand(), new HelpCommand(), new ResetCommand(input),
 			new ExitCommand(), new UpdateCommand(), new MoveCommand(input, null), new ShockwaveCommand(), new BuyCommand(input), new ShootCommand(input, null) };
 
-	public static Command parseCommand(String[] commandWords) {
+	public static Command parseCommand(String[] commandWords) throws CommandParseException {
 		boolean found = false;
 		int i = 0;
 		Command command = null;

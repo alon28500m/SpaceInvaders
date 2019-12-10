@@ -39,7 +39,7 @@ public class ExplosiveShip extends AlienShip{
 
 	@Override
 	public String toString() {
-		return "*<n>*";
+		return "*<" + shield + ">*";
 	}
 
 }

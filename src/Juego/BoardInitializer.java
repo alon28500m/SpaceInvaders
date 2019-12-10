@@ -26,7 +26,7 @@ public class BoardInitializer {
 
 	private void initializeCarrierShips() {
 			for(int i = 0; i < level.getNumCarrierShips(); i++) {
-				board.elements[i+board.getcurrentElements()] = new Carrier(game, i % level.getNumCarrierShipsPerRow(),Game.DIM_Y- 1 - i/level.getNumCarrierShipsPerRow());
+				board.elements[i+board.getcurrentElements()] = new Carrier(game, i % level.getNumCarrierShipsPerRow(), 1 + i/level.getNumCarrierShipsPerRow());
 				board.add(board.elements[i]);
 			}
 	}

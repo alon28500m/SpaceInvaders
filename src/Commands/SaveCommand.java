@@ -1,5 +1,6 @@
 package Commands;
 
+
 import java.util.Scanner;
 
 import Juego.Game;
@@ -13,7 +14,8 @@ Scanner in;
 
 	@Override
 	public boolean execute(Game game) {
-		// TODO Auto-generated method stub
+
+		
 		return false;
 	}
 
@@ -24,7 +26,7 @@ Scanner in;
 			save = new SaveCommand( in, commandWords[1]);
 			return save;
 		}
-		System.out.println("Game successfully saved in file <filename_provided_by_the_user>.dat. Use the load command to reload it");
+		System.out.println("Game successfully saved in file "+ commandWords[1]+".dat. Use the load command to reload it");
 		return null;
 	}
 	

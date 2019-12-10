@@ -24,6 +24,7 @@ public class Game implements IPlayerController {
 		level = gameLevel;
 		initializer = new BoardInitializer();
 		initGame();
+		doExit = false;
 	}
 
 	public Random getRand() {
@@ -32,8 +33,8 @@ public class Game implements IPlayerController {
 
 	public void initGame() {
 		currentCycle = 0;
+		player = new UCMShip(this, DIM_Y - 1, DIM_X/2, 3);
 		board = initializer.initialize(this, level);
-		player = new UCMShip(this, DIM_X / 2, DIM_Y - 1, 3);
 		board.add(player);
 	}
 
@@ -53,8 +54,8 @@ public class Game implements IPlayerController {
 		board.add(object);
 	}
 
-	public String positionToString(int X, int Y) {
-		return board.toString(X, Y);
+	public String positionToString(int i, int j) {
+		return board.toString(i,j);
 	}
 
 	public boolean isFinished() {

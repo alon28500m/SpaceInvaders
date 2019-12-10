@@ -13,11 +13,10 @@ public class UCMShip extends Ship{
 		super(game, X, Y, lives);
 		shockwave = false;
 		misil = null;
-		points = 0;
+		this.points = 0;
 		isLeft = false;
 		setSpeed(0);
 		setSupermisil(false);
-		// TODO Auto-generated constructor stub
 	}
 	public boolean getShockwave() {return this.shockwave;}
 	public boolean setShockwave(boolean wave) {return shockwave = wave;}
@@ -70,6 +69,7 @@ public class UCMShip extends Ship{
 	public void enableMisil() {this.misil = null;}
 	public void setPoints(int p) {this.points += p;}
 	public int getPoints() {return this.points;}
+	
 	public void incrementX(int value) {this.x += value;}
 	public void decrementX(int value) {this.x -= value;}
 		// TODO Auto-generated method stub

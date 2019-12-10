@@ -21,20 +21,7 @@ public class StringifyCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) {
-		boolean keepGoing = false;
-		System.out.println(printer);
-		while (!game.isFinished()) {
-			System.out.println(PROMPT);
-			String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
-			Command command = CommandGenerator.parseCommand(words);
-			if (command != null)
-				if (command.execute(game))
-					System.out.println(printer);
-				else
-					System.out.format(unknownCommandMsg);
-		}
-		keepGoing = true;
-		return keepGoing;
+	return false;
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class Board {
 	public Board(int width, int height) {
 		currentElements = 0;
 		elements = new GameElement[width*height];
-		for (int i = 0; i < width*height; i++) {
+		for (int i = 1; i < width*height; i++) {
 			elements[i] = null;
 		}
 	}
@@ -41,9 +41,11 @@ public class Board {
 	}
 	public int getCurrentElements() {return currentElements;}
 
-	public String toString( int X, int Y ) {
+	public String toString( int X, int Y) {
 		String out = "";
-		out = elements[getIndex(X,Y)].toString();
+		if(getIndex(X,Y) != -1) {
+			out = elements[getIndex(X,Y)].toString();
+		}
 		return out;
 	}
 	
@@ -103,7 +105,7 @@ public class Board {
 		boolean ok = false;
 		for(int i = 0; i < currentElements; i++) {
 			if(elements[i] instanceof Ship) {
-				ok = elements[i].getY() == 0;
+				ok = elements[i].getY() == Game.DIM_Y;
 				break;
 			}
 		}

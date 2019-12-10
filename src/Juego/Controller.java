@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import Commands.Command;
 import Commands.CommandGenerator;
+import Exceptions.CommandExecuteException;
+import Exceptions.CommandParseException;
 import Printer.GamePrinter;
 import Printer.PrinterTypes;
 
@@ -20,19 +22,40 @@ public class Controller {
 		in = new Scanner(System.in);
 	}
 	public void execute() {
-		printer = PrinterTypes.BOARDPRINTER.getObject(game);
-		System.out.println(printer);
-		while (!game.isFinished()) {
-			System.out.println(PROMPT);
-			String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
-			Command command = CommandGenerator.parseCommand(words);
+		
+		//
+		//
+		//FORMA CORRECTA DE CONSEGUIR EL PRINTER
+		PrinterTypes enumerado = PrinterTypes.BOARDPRINTER;
+		printer = enumerado.getObject(game);
+		
+		game.initGame();
+		//AHORA TE ESTA PETANDO PORQUE NO INICIALIZAS TODAS LAS COSAS QUE 
+		//UTILIZA EL PRINTER COMO LA PUNTUACION. TODAS ESAS COSAS SE DEBEN INICIALIZAR O PONER 
+		//A CERO EN EL INITGAME QUE NI SIQUIERA LLAMABAS. pIENSA QUE ES IGUAL QUE EN LA OTRA.
+		//INICIAMOS LA PARTIDA Y LUEGO PINTAMOS.
+	
+		//UNA VES QUE ARREGLES EL INITGAME TE DEBERIA PINTAR SIN PROBLEMA
+		
+		
+		System.out.println(printer.toString(game));
+		while (!game.isFinished()){
+			System.out.print(PROMPT);
+			String[] words = in.nextLine().trim(). split ("\\s+");
+			try {
+				Command command = CommandGenerator.parseCommand(words);
 			if (command != null)
 				if (command.execute(game)) {
-					System.out.println(printer);
+					System.out.println(printer.toString(game));
 					game.update();
 				}
 				else
-					System.out.format(unknownCommandMsg);
-		}
+				System.out.println(unknownCommandMsg);
+				}
+			catch (CommandParseException /* | CommandExecuteException  */ex) {
+				System.err.format(ex.getMessage() + "%n%n");
+			}
 	}
+	}
+
 }

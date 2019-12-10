@@ -6,11 +6,10 @@ public class Stringifier extends GamePrinter {
 
 	
 		public Stringifier(Game game) {
-		super(game);
 		// TODO Auto-generated constructor stub
 	}
 
-		public String toString() {
+		public String toString(Game game) {
 			String out = "";
 			out += "- - - Space Invaders 2 - - - /n";
 			out += "/n";
