@@ -1,13 +1,11 @@
 package Elements;
 
-import Juego.Board;
+
 import Juego.Game;
 
 public abstract class AlienShip extends EnemyShip{
 	static boolean isLeft;
 	static boolean moveDown;
-	Board board; 
-
 	public AlienShip(Game game, int X, int Y, int lives) {
 		super(game, X, Y, lives);
 		isLeft = true;
@@ -19,19 +17,24 @@ public abstract class AlienShip extends EnemyShip{
 	public abstract void onDelete();
 	
 	public static boolean getDir() {return isLeft;}
-	@SuppressWarnings("static-access")
+
 	public boolean setDir(boolean dir) {return isLeft = dir;}
 	
 	public void move() {
-		if((x<8)&&(x>0)&&(!moveDown)) {
+		if((x<Game.DIM_X)&&(x>0)&&(!moveDown)) {
 			if(isLeft == true)
 				x--;
+				if(game.isOnBoard(x-1, y))
+					moveDown = true;
 			else
-				x++;	
+				x++;
+				if(game.isOnBoard(x+1, y))
+					moveDown = true;
+			
 		}
-		else {
-			y--;
+		else if(moveDown){
 			isLeft = !isLeft;
+			game.MovedDown();
 			moveDown = false;
 		}
 	}
@@ -39,7 +42,7 @@ public abstract class AlienShip extends EnemyShip{
 	public abstract String toString();
 	
 	public boolean allDead() {
-		if(board.getcurrentElements() == 0)
+		if(game.getcurrentElements() == 0)
 			return true;
 		else 
 			return false;

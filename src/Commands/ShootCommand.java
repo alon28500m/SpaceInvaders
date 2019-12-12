@@ -1,4 +1,4 @@
-package Commands;
+  package Commands;
 
 import java.util.Scanner;
 
@@ -21,7 +21,8 @@ public class ShootCommand extends Command {
 				keepGoing = false;
 				System.out.println("Error, no supermissile");
 			}
-			game.shootSuper();
+			else
+				game.shootSuper();
 		}
 		else
 			game.shootMissile();
@@ -32,7 +33,7 @@ public class ShootCommand extends Command {
 	public Command parse(String[] commandWords) {
 		ShootCommand shoot;
 		if ((commandWords[0].equals(this.name)) || (commandWords[0].equals(this.shortName))) {
-			shoot = new ShootCommand(in, commandWords[1]);
+				shoot = new ShootCommand(in, commandWords[1]);
 			return shoot;
 		} else
 			return null;

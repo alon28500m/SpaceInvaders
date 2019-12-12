@@ -2,6 +2,9 @@ package Juego;
 
 
 
+
+import Elements.Carrier;
+import Elements.Destroyer;
 import Elements.ExplosiveShip;
 import Elements.GameElement;
 import Elements.Missile;
@@ -41,11 +44,10 @@ public class Board {
 	}
 	public int getCurrentElements() {return currentElements;}
 
-	public String toString( int X, int Y) {
+	public String toString( int X, int Y ) {
 		String out = "";
-		if(getIndex(X,Y) != -1) {
+		if(getIndex(X,Y) > -1)
 			out = elements[getIndex(X,Y)].toString();
-		}
 		return out;
 	}
 	
@@ -105,7 +107,7 @@ public class Board {
 		boolean ok = false;
 		for(int i = 0; i < currentElements; i++) {
 			if(elements[i] instanceof Ship) {
-				ok = elements[i].getY() == Game.DIM_Y;
+				ok = elements[i].getY() == 0;
 				break;
 			}
 		}
@@ -146,5 +148,14 @@ public class Board {
 			hasHit = true;
 		}
 		return hasHit;
+	}
+
+	public void MovedDown() {
+
+		for(int i = 0; i < currentElements; i++) {
+			if(elements[i] instanceof Carrier||elements[i] instanceof Destroyer||elements[i] instanceof ExplosiveShip)
+				elements[i].setY(elements[i].getY()+ 1);
+		}
+	
 	}
 }

@@ -26,15 +26,15 @@ public class BoardInitializer {
 
 	private void initializeCarrierShips() {
 			for(int i = 0; i < level.getNumCarrierShips(); i++) {
-				board.elements[i+board.getcurrentElements()] = new Carrier(game, i % level.getNumCarrierShipsPerRow(), 1 + i/level.getNumCarrierShipsPerRow());
-				board.add(board.elements[i]);
+				board.elements[i+board.getcurrentElements()] = new Carrier(game,Game.DIM_X/2 - i % level.getNumCarrierShipsPerRow()+level.getNumCarrierShipsPerRow()/2,2 + i/level.getNumCarrierShipsPerRow());
+				board.add(board.elements[i+board.getcurrentElements()]);
 			}
 	}
 
 	private void initializeDestroyers() {
 		for(int i = 0; i < level.getNumDestroyersPerRow(); i++) {
-			board.elements[i + board.getcurrentElements()] = new Destroyer(game, i%level.getNumDestroyersPerRow(),Game.DIM_Y- 1 - i/level.getNumDestroyersPerRow()); ;
-			board.add(board.elements[i]);
+			board.elements[i + board.getcurrentElements()] = new Destroyer(game,Game.DIM_X/2 - i%level.getNumDestroyersPerRow()+level.getNumDestroyersPerRow()/2,1 + i/level.getNumDestroyersPerRow()); ;
+			board.add(board.elements[i+board.getcurrentElements()]);
 		}
 	}
 }

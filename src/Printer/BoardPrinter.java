@@ -1,80 +1,55 @@
 package Printer;
 
+import Juego.BoardInitializer;
 import Juego.Game;
 
-
-
 public class BoardPrinter extends GamePrinter {
-	private int numRows;
-	private int numCols;
-	String[][] board;
-	final String space = " ";
+	int rows = 8, columns = 9;
+	BoardInitializer init;
+	private int cellSize = 7;
+	private String space = " ";
+	private String vDelimiter = "|";
+	private String hDelimiter = "-";
 	
-	public BoardPrinter(int cols, int rows){
-		this.numRows = rows;
-		this.numCols = cols;
+	public BoardPrinter(Game game){
+		super(game);
 	}
-	public BoardPrinter(Game game) {
-		// TODO Auto-generated constructor stub
-	}
-	private void encodeGame(Game game) {
-		board = new String[numRows][numCols];
-		for(int i = 0; i < numRows; i++) {
-			for(int j = 0; j < numCols; j++) {
-				board[i][j] =  game.positionToString(i, j);
+	
+
+	
+	public String toString(Game game)
+	{
+		String out = "";
+		
+		out += "Score: " + game.getScore() + "\n";
+		out += "Shield: " + game.getShield() + "\n";
+		out += "ShockWave: " + (game.getSchockwave() ? "YES" : "NO") + "\n";
+		out += "Cycle number: " + game.getCurrentCycle() + "\n";
+		
+		out += "\n" + " " + MyStringUtils.repeat(hDelimiter, (7+1)*columns) + "\n"; 
+		
+		for (int j = 0; j < rows; j++) 
+		{
+			out += vDelimiter;
+			for (int i = 0; i < columns; i++) 
+			{
+				String cur_cell = game.positionToString(i, j);
+				
+				if(cur_cell == null)
+					out += MyStringUtils.repeat(space, cellSize);
+				else
+					out += MyStringUtils.centre(cur_cell, cellSize);
+				
+				out += vDelimiter;
 			}
+			out += "\n" + " " + MyStringUtils.repeat(hDelimiter, (7+1)*columns) + "\n";
 		}
-	}
-	@Override
-	public String toString(Game game) {
-		encodeGame(game);
-		int cellSize = 7;
-		int marginSize = 2;
-		String vDelimiter = "|";
-		String hDelimiter = "-";
 		
-		String rowDelimiter = MyStringUtils.repeat(hDelimiter, (numCols * (cellSize + 1)) - 1);
-		String margin = MyStringUtils.repeat(space, marginSize);
-		String lineDelimiter = String.format("%n%s%s%n", margin + space, rowDelimiter);
-		
-		StringBuilder str = new StringBuilder();
-		//
-		//
-		//AÑADIMOS LA INFO DE LA PARTIDA AL TABLERO
-		str.append(game.infoToString());
-		//
-		//
-		//
-		str.append(lineDelimiter);
-		
-		for(int i=0; i<numRows; i++) {
-				str.append(margin).append(vDelimiter);
-				for (int j = 0; j < numCols; j++) {
-					str.append( MyStringUtils.centre(board[i][j], cellSize)).append(vDelimiter);
-				}
-				str.append(lineDelimiter);
-		}
-		return str.toString();
-	}
-
-	@Override
-	public GamePrinter parse(String name) {
-		if (name.equalsIgnoreCase("formattedprinter"))
-			return new BoardPrinter(Game.DIM_X, Game.DIM_Y);
-		else 
-			return null;
-	}
-
-	@Override
-	public String helpText() {
-		return "BoardPrinter: pinta el tablero.";
-	}
-	@Override
-	public GamePrinter setGame(Game game) {
-		// TODO Auto-generated method stub
-		return null;
+		return out;
 	}
 	
-	
-
+		public GamePrinter setGame(Game game2) {
+		BoardPrinter printer = new BoardPrinter(game2);
+		return printer;
+	}
 }

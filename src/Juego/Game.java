@@ -24,7 +24,6 @@ public class Game implements IPlayerController {
 		level = gameLevel;
 		initializer = new BoardInitializer();
 		initGame();
-		doExit = false;
 	}
 
 	public Random getRand() {
@@ -33,7 +32,10 @@ public class Game implements IPlayerController {
 
 	public void initGame() {
 		currentCycle = 0;
-		player = new UCMShip(this, DIM_Y - 1, DIM_X/2, 3);
+		player = new UCMShip(this, DIM_X / 2, DIM_Y - 1, 3);
+		player.setPoints(0);
+		player.setShockwave(false);
+		player.setSupermisil(false);
 		board = initializer.initialize(this, level);
 		board.add(player);
 	}
@@ -54,8 +56,8 @@ public class Game implements IPlayerController {
 		board.add(object);
 	}
 
-	public String positionToString(int i, int j) {
-		return board.toString(i,j);
+	public String positionToString(int X, int Y) {
+		return board.toString(X, Y);
 	}
 
 	public boolean isFinished() {
@@ -139,7 +141,7 @@ public class Game implements IPlayerController {
 	}
 	@Override
 	public boolean shootMissile() {
-		player.computerAction();
+		player.shootMissile();;
 		return true;
 	}
 	
@@ -215,6 +217,15 @@ public class Game implements IPlayerController {
 		}
 		return ok;
 	
+	}
+
+	public void MovedDown() {
+		board.MovedDown();
+		
+	}
+
+	public int getcurrentElements() {
+		return board.getcurrentElements();
 	}
 }
 

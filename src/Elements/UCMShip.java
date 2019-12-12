@@ -17,6 +17,7 @@ public class UCMShip extends Ship{
 		isLeft = false;
 		setSpeed(0);
 		setSupermisil(false);
+		// TODO Auto-generated constructor stub
 	}
 	public boolean getShockwave() {return this.shockwave;}
 	public boolean setShockwave(boolean wave) {return shockwave = wave;}
@@ -28,10 +29,8 @@ public class UCMShip extends Ship{
 		}
 	}
 	public void shootMissile() {
-		if(misil.equals(null)) {
-			misil = new Missile(game, this.x, this.y, 1);
+			misil = new Missile(game, this.x, this.y - 1, 1);
 			game.addObject(misil);
-		}
 	}
 	@Override
 	public void computerAction() {
@@ -73,7 +72,6 @@ public class UCMShip extends Ship{
 	public void incrementX(int value) {this.x += value;}
 	public void decrementX(int value) {this.x -= value;}
 		// TODO Auto-generated method stub
-	public void setX(int value) {this.x = value;}
 	
 	public int getSpeed() {
 		return speed;

@@ -1,6 +1,6 @@
 package Commands;
 
-import Exceptions.CommandParseException;
+
 import Juego.Game;
 
 public abstract class Command {
@@ -21,7 +21,7 @@ public abstract class Command {
 	
 	public abstract boolean execute(Game game);
 	
-	public abstract Command parse(String[] commandWords) throws CommandParseException;
+	public abstract Command parse(String[] commandWords);
 
 	protected boolean matchCommandName(String inputText) {
 		return this.shortName.equalsIgnoreCase(inputText) || this.name.equalsIgnoreCase(inputText);

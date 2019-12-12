@@ -2,24 +2,28 @@ package Elements;
 
 import Juego.Game;
 
-public class Destroyer extends AlienShip{
+public class Destroyer extends AlienShip {
 	public static final int points = 5;
-	
+
 	private Bomb bomb;
+	private boolean hasBomb;
+
 	public Destroyer(Game game, int X, int Y) {
 		super(game, X, Y, 2);
 		bomb = null;
+		hasBomb = false;
 	}
 
 	@Override
 	public void computerAction() {
-		double prob = game.getLevel().getShootFrequency();
-		double rand = game.getRand().nextDouble(); 
-		
-		if(rand <= prob && (bomb.equals(null)))
-		{	
-			bomb = new Bomb(game, this.x, this.y, 1);
-			game.addObject(bomb);
+		if (!hasBomb) {
+			double prob = game.getLevel().getShootFrequency();
+			double rand = game.getRand().nextDouble();
+
+			if (rand <= prob) {
+				bomb = new Bomb(game, this.x, this.y + 1, 1);
+				game.addObject(bomb);
+			}
 		}
 	}
 
@@ -30,7 +34,7 @@ public class Destroyer extends AlienShip{
 	}
 
 	public String toString() {
-		return " !< "+ shield + ">!" ;
+		return " !<" + shield + ">!";
 	}
 
 }

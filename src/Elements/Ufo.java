@@ -6,7 +6,7 @@ import Juego.Game;
 public class Ufo extends EnemyShip {
 private static final int points = 25;
 	public Ufo(Game game) {
-		super(game,Game.DIM_X - 1, 0, 1);
+		super(game, 7, 8, 1);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -22,7 +22,6 @@ private static final int points = 25;
 	@Override
 	public void onDelete() {
 		game.delete(this.x, this.y);
-		game.enableShockWave();
 	}
 
 	@Override

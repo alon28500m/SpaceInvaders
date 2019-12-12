@@ -17,6 +17,12 @@ public abstract class GameElement implements IAttack {
 
 	public int getX() { return this.x;}
 	public int getY() { return this.y;}
+	public int setX(int X) {
+		return this.x = X;
+	}
+	public int setY(int Y) {
+		return this.y = Y;
+	}
 	
 	public boolean isAlive() {
 		return shield > 0;

@@ -2,18 +2,16 @@ package Commands;
 
 import java.util.Scanner;
 
-import Exceptions.CommandParseException;
-
 public class CommandGenerator {
 	static Scanner input;
 	private static Command[] availableCommands = { new ListCommand(), new HelpCommand(), new ResetCommand(input),
-			new ExitCommand(), new UpdateCommand(), new MoveCommand(input, null), new ShockwaveCommand(), new BuyCommand(input), new ShootCommand(input, null) };
+			new ExitCommand(), new UpdateCommand(), new MoveCommand(input, null), new ShockwaveCommand(), new BuyCommand(input, null), new ShootCommand(input, null) };
 
-	public static Command parseCommand(String[] commandWords) throws CommandParseException {
+	public static Command parseCommand(String[] commandWords) {
 		boolean found = false;
 		int i = 0;
 		Command command = null;
-		while (( i < 7)&&(!found)) {
+		while (( i < 9)&&(!found)) {
 			if(availableCommands[i].parse(commandWords) != null) {
 				found = true; 
 				command = availableCommands[i].parse(commandWords);
