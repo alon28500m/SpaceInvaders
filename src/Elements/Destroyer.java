@@ -21,7 +21,7 @@ public class Destroyer extends AlienShip {
 			double rand = game.getRand().nextDouble();
 
 			if (rand <= prob) {
-				bomb = new Bomb(game, this.x, this.y + 1, 1);
+				bomb = new Bomb(game, this.x, this.y + game.getLevel().getNumCarrierShips()/game.getLevel().getNumCarrierShipsPerRow(), 1);
 				game.addObject(bomb);
 			}
 		}

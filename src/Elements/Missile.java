@@ -22,8 +22,8 @@ public class Missile extends Weapon{
 
 	@Override
 	public void move() {
-		y++;
-		if(y > Game.DIM_Y) {
+		y--;
+		if(y < 0) {
 			onDelete();
 		}
 	}
@@ -34,8 +34,8 @@ public class Missile extends Weapon{
 	}
 	public boolean performAttack() {
 		boolean done = false;
-		if(game.checkCollision(x, y + 1)) {
-			done = game.damage(x, y + 1, shield);
+		if(game.checkCollision(x, y - 1)) {
+			done = game.damage(x, y - 1, shield);
 			
 		}	
 		return done;

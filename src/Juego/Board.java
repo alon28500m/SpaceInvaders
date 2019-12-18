@@ -3,6 +3,7 @@ package Juego;
 
 
 
+import Elements.Bomb;
 import Elements.Carrier;
 import Elements.Destroyer;
 import Elements.ExplosiveShip;
@@ -76,10 +77,6 @@ public class Board {
 			}
 			currentElements--;
 	}
-	
-	public int getcurrentElements() {
-			return currentElements;
-	}
 
 	public void removeDead() {
 		for(int i = 0; i < currentElements; i++) {
@@ -116,11 +113,11 @@ public class Board {
 
 	public boolean damage(int X, int Y, int amount) {
 		boolean couldHit = false;
-		if(elements[getIndex(X,Y)] instanceof Missile||elements[getIndex(X,Y)] instanceof SuperMissile)
-			couldHit= elements[getIndex(X, Y + 1)].receiveMissileAttack(amount);
+		if(elements[getIndex(X,Y-1)] instanceof Missile||elements[getIndex(X,Y)] instanceof SuperMissile)
+			couldHit= elements[getIndex(X, Y - 1)].receiveMissileAttack(amount);
 		
-		else if(elements[getIndex(X,Y)] instanceof Missile)
-			couldHit = elements[getIndex(X,Y - 1)].receiveBombAttack(amount);
+		else if(elements[getIndex(X,Y)] instanceof Bomb)
+			couldHit = elements[getIndex(X,Y + 1)].receiveBombAttack(amount);
 		else {
 			for(int i = 0; i < currentElements; i++) {
 				 elements[i].receiveShockWaveAttack(amount);
@@ -129,11 +126,12 @@ public class Board {
 		}
 		return couldHit;		
 	}
+	
 	public void explode(int X, int Y) {
 		for(int i = 0; i < 9; i++) {
 			damage(X-i%3-1,Y-i/3+1, 1);
 		}
-		
+
 	}
 	public void explosiveCarrier(int X, int Y) {
 		int idx = getIndex(X,Y);
@@ -153,9 +151,15 @@ public class Board {
 	public void MovedDown() {
 
 		for(int i = 0; i < currentElements; i++) {
-			if(elements[i] instanceof Carrier||elements[i] instanceof Destroyer||elements[i] instanceof ExplosiveShip)
+			if(isAlienShip(i))
 				elements[i].setY(elements[i].getY()+ 1);
 		}
 	
+	}
+	public boolean isAlienShip(int idx) {
+		boolean itIs = false;
+		if(elements[idx] instanceof Carrier||elements[idx] instanceof Destroyer||elements[idx] instanceof ExplosiveShip)
+			itIs=true;
+		return itIs;
 	}
 }

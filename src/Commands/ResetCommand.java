@@ -15,37 +15,35 @@ Scanner in;
 Board board;
 GamePrinter print;
 Random rand;
-	public ResetCommand(Scanner input) {
+	public ResetCommand() {
 		super("reset", "r", "", "[R]eset: starts a new game.\n");
-		in = input;
+		in = new Scanner(System.in);
 	}
 
 	@Override
 	public boolean execute(Game game) {
 		Level d = Level.EASY;
-		System.out.println("Choose a dificulty(0 - easy, 1 - hard, 2 - insane");
+		System.out.println("Choose a dificulty(0 - easy, 1 - hard, 2 - insane)");
 		int temp_dif = in.nextInt();
 		if(temp_dif == 1)
 			d = Level.HARD;
 		else if(temp_dif == 2)
 			d = Level.INSANE;
-		
-		System.out.println("Choose a new seed: ");
+	
 		game = new Game(d, rand);
 		print = new BoardPrinter(game);
-		return false;
+		return true;
 	}
 
 	@Override
 	public Command parse(String[] commandWords) {
 		ResetCommand reset;
 		if((commandWords[0].contentEquals(this.name))||(commandWords[0].contentEquals(this.shortName))) {
-			reset = new ResetCommand(in);
+			reset = new ResetCommand();
 			return reset;
 		}
 		else
 			return null;
-		
 	}
 
 }

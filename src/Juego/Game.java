@@ -225,7 +225,7 @@ public class Game implements IPlayerController {
 	}
 
 	public int getcurrentElements() {
-		return board.getcurrentElements();
+		return board.getCurrentElements();
 	}
 }
 

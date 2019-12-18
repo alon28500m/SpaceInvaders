@@ -43,7 +43,7 @@ public abstract class GameElement implements IAttack {
 	}
 
 	public void getDamage(int damage) {
-		shield = (damage >= shield ? 0 : shield - damage);
+		shield -= damage;
 	}
 
 	public boolean isOut() {

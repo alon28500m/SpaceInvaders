@@ -22,7 +22,7 @@ public class Bomb extends Weapon{
 
 	@Override
 	public void move() {
-		y--;
+		y++;
 		if(y == 0)
 			this.onDelete();
 	}
