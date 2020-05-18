@@ -1,0 +1,90 @@
+package Elements;
+
+import Juego.Game;
+
+public class UCMShip extends Ship{
+	private boolean shockwave;
+	private Weapon misil; // ??????
+	private boolean supermisil;
+	private int points;
+	private int speed;
+	public UCMShip(Game game, int X, int Y, int lives) {
+		super(game, X, Y, lives);
+		shockwave = false;
+		misil = null;
+		this.points = 0;
+		setSpeed(0);
+		setSupermisil(false);
+		// TODO Auto-generated constructor stub
+	}
+	public boolean getShockwave() {return this.shockwave;}
+	public boolean setShockwave(boolean wave) {return shockwave = wave;}
+	
+	public void shootSuper() {
+		if(misil.equals(null)) {
+			misil = new SuperMissile(game, this.x, this.y);
+			game.addObject(misil);
+		}
+	}
+	public void shootMissile() {
+			misil = new Missile(game, this.x, this.y - 1, 1);
+			game.addObject(misil);
+	}
+	@Override
+	public void computerAction() {
+		
+	}
+
+	@Override
+	public void onDelete() {
+		game.delete(this.x, this.y);
+		
+	}
+
+	@Override
+	public void move() {
+		if((this.x < 8)&&(this.x > 0)) {
+					x += speed;
+		}
+	}
+
+	@Override
+	public String toString() {
+		String out = "/-^-\\";
+		if(shield == 0)
+			out =  "_+.+_";
+		
+		return out;
+	}
+	public void enableMisil() {this.misil = null;}
+	public void setPoints(int p) {this.points += p;}
+	public int getPoints() {return this.points;}
+	
+	public void incrementX(int value) {this.x += value;}
+	public void decrementX(int value) {this.x -= value;}
+		// TODO Auto-generated method stub
+	
+	public int getSpeed() {
+		return speed;
+	}
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	public boolean getSupermisil() {
+		return supermisil;
+	}
+	public void setSupermisil(boolean supermisil) {
+		this.supermisil = supermisil;
+	}
+	public boolean recieveBombAttack(int amount) {
+		getDamage(amount);
+		return true;
+	}
+	public boolean recieveMissileAttack(int amount) {
+		return false;
+	}
+	public boolean recieveShockwaveAttack(int amount) {
+		return false;
+	}
+}
+
