@@ -1,4 +1,4 @@
-  package Commands;
+package Commands;
 
 import java.util.Scanner;
 
@@ -6,6 +6,8 @@ import Juego.Game;
 
 public class ShootCommand extends Command {
 	Scanner in;
+	private int type;
+
 	public ShootCommand(Scanner input, String commandText) {
 		super("shoot", "s", commandText, "The player shoots a missile");
 		in = input;
@@ -15,28 +17,38 @@ public class ShootCommand extends Command {
 	@Override
 	public boolean execute(Game game) {
 		boolean keepGoing = true;
-		if(getCommandText().contentEquals("supermissile")) {
-			if(!game.getSuperMissile())
-			{
-				keepGoing = false;
-				System.out.println("Error, no supermissile");
-			}
-			else
-				game.shootSuper();
-		}
-		else
+		if (type == 1) {
 			game.shootMissile();
+		} 
+		else if(type == 2){
+			game.shootSuper();
+		}
 		return keepGoing;
 	}
 
 	@Override
 	public Command parse(String[] commandWords) {
-		ShootCommand shoot;
-		if ((commandWords[0].equals(this.name)) || (commandWords[0].equals(this.shortName))) {
-				shoot = new ShootCommand(in, commandWords[1]);
-			return shoot;
-		} else
-			return null;
+		Command com = null;
+	 if (commandWords.length > 1) {
+         if (matchCommandName(commandWords[0])) {
+         	try {
+         	type = Integer.parseInt(commandWords[1]);
+            
+                 if (type == 1) {
+                     
+                     com = this;
+                 }
+                 else if (type == 2) {
+                     
+                     com = this;
+                 }
+         	}
+                 catch (NumberFormatException e)  {
+                     throw new NumberFormatException("Please make sure that the last parameter is a number");
+                 }
+             
+         }
+	 }
+	 return com;
 	}
-
 }

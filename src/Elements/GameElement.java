@@ -28,11 +28,11 @@ public abstract class GameElement implements IAttack {
 		return shield > 0;
 	}
 	
-	public void initElement(GameElement element) {
+	/*public void initElement(GameElement element) {
 		if(element.getClass().equals(Missile.class))
 			game.shootMissile();
-		
-	}
+	}*/
+	
 	public int getShield() {
 		return this.shield;
 	}
@@ -43,7 +43,10 @@ public abstract class GameElement implements IAttack {
 	}
 
 	public void getDamage(int damage) {
-		shield -= damage;
+		if (shield >= damage) 
+			shield -= damage;
+		else 
+			shield = 0;
 	}
 
 	public boolean isOut() {

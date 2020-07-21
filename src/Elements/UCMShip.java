@@ -7,14 +7,12 @@ public class UCMShip extends Ship{
 	private Weapon misil; // ??????
 	private boolean supermisil;
 	private int points;
-	private boolean isLeft;
 	private int speed;
 	public UCMShip(Game game, int X, int Y, int lives) {
 		super(game, X, Y, lives);
 		shockwave = false;
 		misil = null;
 		this.points = 0;
-		isLeft = false;
 		setSpeed(0);
 		setSupermisil(false);
 		// TODO Auto-generated constructor stub
@@ -46,14 +44,7 @@ public class UCMShip extends Ship{
 	@Override
 	public void move() {
 		if((this.x < 8)&&(this.x > 0)) {
-			if(isLeft)
-				x -= speed;
-				if(x < 0)
-					x = 0;
-			else
 				x += speed;
-				if(x > 8)
-					x = 8;
 		}
 	}
 
@@ -79,8 +70,6 @@ public class UCMShip extends Ship{
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
-	public void setDir(boolean dir) { this.isLeft = dir;}
-	
 	public boolean getSupermisil() {
 		return supermisil;
 	}

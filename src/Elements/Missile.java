@@ -1,4 +1,4 @@
-package Elements;
+ package Elements;
 
 import Juego.Game;
 
@@ -35,8 +35,7 @@ public class Missile extends Weapon{
 	public boolean performAttack() {
 		boolean done = false;
 		if(game.checkCollision(x, y - 1)) {
-			done = game.damage(x, y - 1, shield);
-			
+			done = game.damageMissile(x, y - 1, shield);
 		}	
 		return done;
 	}

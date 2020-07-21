@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class CommandGenerator {
 	static Scanner input;
 	private static Command[] availableCommands = { new ListCommand(), new HelpCommand(), new ResetCommand(),
-			new ExitCommand(), new UpdateCommand(), new MoveCommand(input, null), new ShockwaveCommand(), new BuyCommand(input, null), new ShootCommand(input, null) };
+			new ExitCommand(), new UpdateCommand(), new MoveCommand(input, null, false), new ShockwaveCommand(), 
+			new BuyCommand(input, null), new ShootCommand(input, null), new StringifyCommand(null, input) };
 
 	public static Command parseCommand(String[] commandWords) {
 		boolean found = false;

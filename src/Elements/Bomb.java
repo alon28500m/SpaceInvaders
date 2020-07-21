@@ -11,8 +11,10 @@ public class Bomb extends Weapon{
 
 	@Override
 	public void computerAction() {
-		if(game.checkCollision(x, y - 1))
-			this.onDelete();
+		if(game.checkCollision(x, y - 1)) {
+			this.y -= 1;
+		}
+	
 	}
 
 	@Override
@@ -34,7 +36,7 @@ public class Bomb extends Weapon{
 	public boolean performAttack() {
 		boolean done = false;
 		if(game.checkCollision(x, y - 1)) {
-			game.damage(x, y - 1, 1);
+			game.damageBomb(x, y - 1, 1);
 			done = true;
 		}	
 		return done;

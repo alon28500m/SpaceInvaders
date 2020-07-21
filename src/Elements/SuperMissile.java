@@ -12,7 +12,7 @@ public class SuperMissile extends Weapon{
 
 	@Override
 	public void computerAction() {
-		if(game.damage(x, y + 1, shield))
+		if(game.damageMissile(x, y + 1, shield))
 			this.onDelete();
 	}
 

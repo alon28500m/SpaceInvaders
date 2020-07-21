@@ -79,7 +79,7 @@ public class Game implements IPlayerController {
 	}
 
 	public boolean isOnBoard(int X, int Y) {
-		return X < DIM_X && Y < DIM_Y;
+		return X >= 0 && X < DIM_X && Y >= 0 && Y < DIM_Y;
 	}
 
 	public void exit() {
@@ -126,9 +126,11 @@ public class Game implements IPlayerController {
 	}
 
 	@Override
-	public boolean MovePlayer(boolean isMovementLeft, int speed) {
+	public boolean MovePlayer(int speed, boolean direction) {
 		boolean ok = false;
-		player.setDir(isMovementLeft);
+		if(direction) {
+			speed *= -1;
+		}
 		player.setSpeed(speed);
 		player.move();
 		ok = true;
@@ -141,7 +143,7 @@ public class Game implements IPlayerController {
 	}
 	@Override
 	public boolean shootMissile() {
-		player.shootMissile();;
+		player.shootMissile();
 		return true;
 	}
 	
@@ -163,7 +165,7 @@ public class Game implements IPlayerController {
 
 	@Override
 	public void enableShockWave() {
-		player.setShockwave(false);
+		player.setShockwave(true);
 	}
 
 	@Override
@@ -191,8 +193,11 @@ public class Game implements IPlayerController {
 		board.explode(X, Y);
 	}
 
-	public boolean damage(int X, int Y, int amount) {
-		 return board.damage(X, Y, amount);
+	public boolean damageMissile(int X, int Y, int amount) {
+		 return board.damageMissile(X, Y, amount);
+	}
+	public boolean damageBomb(int X, int Y, int amount) {
+		 return board.damageBomb(X, Y, amount);
 	}
 	public boolean checkCollision(int X, int Y) {
 		return board.checkCollision(X,Y);
@@ -212,16 +217,16 @@ public class Game implements IPlayerController {
 	public boolean buySuperMissile() {
 		boolean ok = false;
 		if (player.getPoints() > 20) {
-			ok = true;
+			ok = true; 
+			player.setPoints(-20);
 			player.setSupermisil(ok);
 		}
 		return ok;
 	
 	}
 
-	public void MovedDown() {
-		board.MovedDown();
-		
+	public int alienCount() {
+		return board.alienCount();
 	}
 
 	public int getcurrentElements() {

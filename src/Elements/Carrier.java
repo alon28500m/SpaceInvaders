@@ -9,7 +9,6 @@ public class Carrier extends AlienShip{
 	public Carrier(Game game, int X, int Y) {
 		super(game, X, Y, 2);
 		isLeft = true;
-		moveDown = false;
 		explode = 0.05;
 		// TODO Auto-generated constructor stub
 	}

@@ -16,7 +16,6 @@ private static final int points = 25;
 		double prob = game.getLevel().getUfoFrequency();
 		if(rand <= prob)
 			new Ufo(game);
-		
 	}
 
 	@Override
@@ -27,7 +26,6 @@ private static final int points = 25;
 	@Override
 	public void move() {
 		x--;
-		
 	}
 
 	@Override
